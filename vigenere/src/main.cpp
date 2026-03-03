@@ -1,8 +1,26 @@
 // This is basically like a caesar cipher, except the offset isn't static, but
 // determined by a keyword repeated for the size of string to encode/decode.
 
+#include <cassert>
 #include <iostream>
 #include <string>
+
+char caesar_shift(char c, int offset) {
+    assert(c >= 'a' && c <= 'z');
+
+    char shifted;
+
+    c += offset;
+    if (c < 'a') {
+        int difference = 'a' - c;
+        shifted = 'z' - difference;
+    } else if (c > 'z') {
+        int difference = c - 'z';
+        shifted = 'a' + difference;
+    }
+
+    return shifted;
+}
 
 std::string decode(std::string encoded, std::string keyword) {
     std::string key;
