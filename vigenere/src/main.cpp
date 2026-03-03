@@ -43,6 +43,18 @@ std::string decode(std::string encoded, std::string keyword) {
 
     std::string decoded;
 
+    size_t index = 0;
+    while (index < encoded.length()) {
+        if (encoded[index] >= 'a' && encoded[index] <= 'z') {
+            const int alphabetical_index = key[index] - 'a';
+
+            decoded.push_back(caesar_shift(encoded[index], alphabetical_index));
+        } else {
+            decoded.push_back(encoded[index]);
+        }
+        ++index;
+    }
+
     return decoded;
 }
 
