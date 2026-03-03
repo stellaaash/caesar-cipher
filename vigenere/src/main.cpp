@@ -6,20 +6,25 @@
 #include <string>
 
 char caesar_shift(char c, int offset) {
-    assert(c >= 'a' && c <= 'z');
+    assert(c >= 'a' && c <= 'z' && "Shifted character isn't alphabetical");
 
-    char shifted;
-
-    c += offset;
-    if (c < 'a') {
-        int difference = 'a' - c;
+    int shifted = c + static_cast<char>(offset);
+    if (shifted < 'a') {
+        int difference = 'a' - shifted;
         shifted = 'z' - difference;
-    } else if (c > 'z') {
-        int difference = c - 'z';
+        std::clog << "[!] - Difference: " << difference << std::endl;
+    } else if (shifted > 'z') {
+        int difference = shifted - 'z';
         shifted = 'a' + difference;
+        std::clog << "[!] - Difference: " << difference << std::endl;
+    } else {
+        // Do nothing if the shifted character is still alphabetical after the shift
     }
 
-    return shifted;
+    std::clog << "[!] - Shifted character '" << c << "' to character '"
+              << static_cast<char>(shifted) << "'" << std::endl;
+
+    return static_cast<char>(shifted);
 }
 
 std::string decode(std::string encoded, std::string keyword) {
